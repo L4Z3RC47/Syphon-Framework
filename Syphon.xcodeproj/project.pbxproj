@@ -30,7 +30,6 @@
 		1B09098711CD9A1C00BCBE41 /* SyphonClientConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B09098511CD9A1C00BCBE41 /* SyphonClientConnectionManager.h */; settings = {ATTRIBUTES = (); }; };
 		1B09098811CD9A1C00BCBE41 /* SyphonClientConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B09098611CD9A1C00BCBE41 /* SyphonClientConnectionManager.m */; };
 		1B4932331FC2052800F6EDCA /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4932321FC2051500F6EDCA /* Metal.framework */; };
-		1B4932351FC2053000F6EDCA /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4932341FC2052800F6EDCA /* MetalPerformanceShaders.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		BD038877122EAB1A007725FF /* SyphonIOSurfaceImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BD038875122EAB1A007725FF /* SyphonIOSurfaceImage.h */; };
@@ -178,7 +177,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B4932351FC2053000F6EDCA /* MetalPerformanceShaders.framework in Frameworks */,
 				1B4932331FC2052800F6EDCA /* Metal.framework in Frameworks */,
 				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
 				1B09069B11CB2FBD00BCBE41 /* IOSurface.framework in Frameworks */,

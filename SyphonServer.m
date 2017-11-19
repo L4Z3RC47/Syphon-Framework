@@ -42,8 +42,32 @@
 #define SYPHON_GL_TEXTURE_RECT  0x84F5
 #define SYPHON_GL_TEXTURE_2D    0x0DE1
 
-@interface SyphonServer (Private)
+@interface SyphonServer ()
+{
+@private
+    NSString *_name;
+    NSString *_uuid;
+    BOOL _broadcasts;
+    
+    id _connectionManager;
+    id _renderer;
+    CGLContextObj _shareContext;
+    
+    void  *_surfaceRef;
+    BOOL _pushPending;
+    SYPHON_IMAGE_UNIQUE_CLASS_NAME *_surfaceTexture;
+    
+    BOOL _wantsContextChanges;
+    
+    GLint _virtualScreen;
+    
+    int32_t _mdLock;
+    
+    id<NSObject> _activityToken;
+}
+
 + (void)retireRemainingServers;
+
 @end
 
 __attribute__((destructor))
