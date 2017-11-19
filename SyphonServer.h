@@ -77,7 +77,7 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 @class SYPHON_IMAGE_UNIQUE_CLASS_NAME;
 
 #pragma mark - Generic Server Interface
-@protocol SyphonServer
+@protocol SyphonServer<NSObject>
 
 
 /*!
@@ -213,7 +213,6 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
     
     id _connectionManager;
 }
-
 
 /*!
  Returns an opaque object conforming to the SyphonServerGL implementation, allowing you to integrate Syphon into your OpenGL Pipeline and send GL Textures as Syphon Images.

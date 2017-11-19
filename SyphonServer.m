@@ -86,10 +86,6 @@ static void finalizer()
 	}
 }
 
-- (id)init
-{
-	return [self initWithName:nil context:NULL options:nil];
-}
 
 - (id)initWithName:(NSString*)serverName options:(NSDictionary *)options
 {
@@ -143,11 +139,15 @@ static void finalizer()
 	return self;
 }
 
+#pragma mark -
+
 - (id<SyphonServerGL>)initWithName:(NSString*)serverName context:(CGLContextObj)context options:(NSDictionary *)options
 {
     return (id<SyphonServerGL>)[[SyphonServerGL alloc] initWithName:serverName context:context options:options];
 }
 
+
+#pragma mark - 
 
 - (void) shutDownServer
 {

@@ -275,25 +275,11 @@
 			isa = PBXGroup;
 			children = (
 				1B0906BF11CBB0F500BCBE41 /* SyphonServer.m */,
-				1B49323A1FC2231D00F6EDCA /* SyphonServer+Private.h */,
-				1B4932361FC21CF800F6EDCA /* SyphonServerGL.h */,
-				1B4932371FC21CF800F6EDCA /* SyphonServerGL.m */,
 				BD45585C11DF6BD300F15521 /* SyphonServerConnectionManager.h */,
 				BD45585D11DF6BD300F15521 /* SyphonServerConnectionManager.m */,
-				E2D6C88A1D8B4A6D00108260 /* SyphonServerRenderer.h */,
-				E2D6C88B1D8B4A6D00108260 /* SyphonServerRenderer.m */,
-				E2D6C88E1D8B4DED00108260 /* SyphonServerRendererLegacy.h */,
-				E2D6C88F1D8B4DED00108260 /* SyphonServerRendererLegacy.m */,
-				E28D0C981D8F43380036DF26 /* SyphonServerRendererCore.h */,
-				E28D0C991D8F43380036DF26 /* SyphonServerRendererCore.m */,
-				E28D0CA61D9296520036DF26 /* SyphonShader.h */,
-				E28D0CA71D9296520036DF26 /* SyphonShader.m */,
-				E28D0CAA1D930B9F0036DF26 /* SyphonServerShader.h */,
-				E28D0CAB1D930B9F0036DF26 /* SyphonServerShader.m */,
-				E28D0CAE1D9542B30036DF26 /* SyphonVertices.h */,
-				E28D0CAF1D9542B30036DF26 /* SyphonVertices.m */,
-				E28D0CB21D95770C0036DF26 /* SyphonServerVertices.h */,
-				E28D0CB31D95770C0036DF26 /* SyphonServerVertices.m */,
+				1B49323A1FC2231D00F6EDCA /* SyphonServer+Private.h */,
+				1BE8C5B01FC224A4004CF878 /* GL */,
+				1BE8C5B21FC225BA004CF878 /* Metal */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -329,6 +315,47 @@
 				1B4932321FC2051500F6EDCA /* Metal.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1BE8C5B01FC224A4004CF878 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				1B4932361FC21CF800F6EDCA /* SyphonServerGL.h */,
+				1B4932371FC21CF800F6EDCA /* SyphonServerGL.m */,
+				E2D6C88A1D8B4A6D00108260 /* SyphonServerRenderer.h */,
+				E2D6C88B1D8B4A6D00108260 /* SyphonServerRenderer.m */,
+				E2D6C88E1D8B4DED00108260 /* SyphonServerRendererLegacy.h */,
+				E2D6C88F1D8B4DED00108260 /* SyphonServerRendererLegacy.m */,
+				E28D0C981D8F43380036DF26 /* SyphonServerRendererCore.h */,
+				E28D0C991D8F43380036DF26 /* SyphonServerRendererCore.m */,
+				E28D0CA61D9296520036DF26 /* SyphonShader.h */,
+				E28D0CA71D9296520036DF26 /* SyphonShader.m */,
+				E28D0CAA1D930B9F0036DF26 /* SyphonServerShader.h */,
+				E28D0CAB1D930B9F0036DF26 /* SyphonServerShader.m */,
+				E28D0CAE1D9542B30036DF26 /* SyphonVertices.h */,
+				E28D0CAF1D9542B30036DF26 /* SyphonVertices.m */,
+				E28D0CB21D95770C0036DF26 /* SyphonServerVertices.h */,
+				E28D0CB31D95770C0036DF26 /* SyphonServerVertices.m */,
+			);
+			name = GL;
+			sourceTree = "<group>";
+		};
+		1BE8C5B11FC2259C004CF878 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				BDFAE526148CDA84008C9E6F /* SyphonOpenGLFunctions.h */,
+				BDFAE525148CDA84008C9E6F /* SyphonOpenGLFunctions.c */,
+				E2D6C8871D8B470E00108260 /* SyphonCGL.h */,
+				E2D6C8861D8B470E00108260 /* SyphonCGL.c */,
+			);
+			name = GL;
+			sourceTree = "<group>";
+		};
+		1BE8C5B21FC225BA004CF878 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Metal;
 			sourceTree = "<group>";
 		};
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
@@ -373,10 +400,7 @@
 				BD3796CF11DD470D0042870B /* SyphonPrivate.m */,
 				BDFBD77B126F4D8800075A23 /* SyphonDispatch.h */,
 				BDFBD77C126F4D8800075A23 /* SyphonDispatch.c */,
-				BDFAE526148CDA84008C9E6F /* SyphonOpenGLFunctions.h */,
-				BDFAE525148CDA84008C9E6F /* SyphonOpenGLFunctions.c */,
-				E2D6C8871D8B470E00108260 /* SyphonCGL.h */,
-				E2D6C8861D8B470E00108260 /* SyphonCGL.c */,
+				1BE8C5B11FC2259C004CF878 /* GL */,
 			);
 			name = "Private Shared";
 			sourceTree = "<group>";
