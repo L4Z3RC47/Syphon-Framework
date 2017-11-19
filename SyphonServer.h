@@ -29,7 +29,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/OpenGL.h>
-#import <Metal/Metal.h>
 
 
 /*! @name Server Options Dictionary Key Constants */
@@ -189,11 +188,54 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 
 #pragma mark - Metal Server Interface
 
+// FOrward declare Metal protocols should we not be on an OS which supports Metal
+@protocol MTLDevice;
+@protocol MTLTexture;
+
 // Metal Syphon Server for 1013 or better.
 @protocol SyphonServerMetal<SyphonServer>
+
+/** @name Instantiation */
+/** @{ */
+/*!
+ Creates a new server with the specified human-readable name (which need not be unique), Metal Device and options. The server will be started immediately. Init may fail and return nil if the server could not be started.
+ 
+ This method creates a private Metal Command Queue for the Syphon Server via the MTLDevice passed in.
+ 
+ @param serverName Non-unique human readable server name. This is not required and may be nil, but is usually used by clients in their UI to aid identification.
+ @param context The Metal device that textures will be stored on and available on for publishing, and in which rendering commands will be encoded.
+ @param options A dictionary containing key-value pairs to specify options for the server. Currently supported options are SyphonServerOptionIsPrivate, SyphonServerOptionAntialiasQuality and SyphonServerOptionHasDepthBuffer. See their descriptions for details.
+ @returns A newly intialized SyphonServer. Nil on failure.
+ */
+
 - (id<SyphonServerMetal>)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options;
+
+/** @} */
+/** @name Properties */
+/** @{ */
+/*!
+ The Metal device the server uses for drawing.
+ */
+
 @property (readonly) id<MTLDevice> device;
+
+/** @} */
+/** @name Publishing Frames */
+/** @{ */
+
+/*!
+ Publishes the part of the texture described in region of the named texture to clients. The texture is copied and can be safely disposed of or modified once this method has returned.
+ 
+ This method submits commands via a private Metal Command Queue and new Metal Command Buffer per invocation. The passed in texture should not be updated or rendered to during this methods invocation, on this thread or any other.
+
+ @param texture The metal texture to publish, which must be a texture created on the same Metal device that the server has been allocated with. This texture must be valid and populated with contents.
+ @param region The sub-region of the texture to publish.
+ @param isFlipped Is the texture flipped?
+ */
 - (void)publishFrameTexture:(id<MTLTexture>)texture imageRegion:(NSRect)region flipped:(BOOL)isFlipped;
+
+/** @} */
+
 @end
 
 @class SYPHON_IMAGE_UNIQUE_CLASS_NAME;
@@ -222,7 +264,7 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 /*!
  Returns an opaque object conforming to the SyphonServerMetal implementation, allowing you to integrate Syphon into your Metal Pipeline and send Metal Textures as Syphon Images.
  */
-//- (id<SyphonServerMetal>)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options;
+- (id<SyphonServerMetal>)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options;
 
 @end
 
