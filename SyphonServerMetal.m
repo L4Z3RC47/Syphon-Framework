@@ -70,7 +70,7 @@
     _surfaceRef =  IOSurfaceCreate((CFDictionaryRef) surfaceAttributes);
     [surfaceAttributes release];
 
-    MTLTextureDescriptor* surfaceTextureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRG422 width:size.width height:size.height mipmapped:NO];
+    MTLTextureDescriptor* surfaceTextureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm width:size.width height:size.height mipmapped:NO];
     
     self.surfaceTexture =[ self.device newTextureWithDescriptor:surfaceTextureDescriptor iosurface:_surfaceRef plane:0];
 }
