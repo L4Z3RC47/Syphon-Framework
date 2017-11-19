@@ -38,6 +38,7 @@
 #import <IOSurface/IOSurface.h>
 
 #import "SyphonServerGL.h"
+#import "SyphonServerMetal.h"
 
 // These are declared in core and legacy headers but this class is profile agnostic
 // so define our own versions here
@@ -145,6 +146,13 @@ static void finalizer()
 {
     return (id<SyphonServerGL>)[[SyphonServerGL alloc] initWithName:serverName context:context options:options];
 }
+
+- (id<SyphonServerMetal>)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options
+{
+    return (id<SyphonServerMetal>)[[SyphonServerMetal alloc] initWithName:serverName device:device options:options];
+
+}
+
 
 
 #pragma mark - 
