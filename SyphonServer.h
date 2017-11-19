@@ -97,12 +97,6 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 
 @property (readonly) BOOL hasClients;
 
-/*!
- Returns a SyphonImage representing the current output from the server, valid in the server's CGL context. Call this method every time you wish to access the current server frame. This object has a limited useful lifetime, and may have GPU resources associated with it: you should release it as soon as you are finished drawing with it.
- 
- @returns A SyphonImage representing the current output from the server. YOU ARE RESPONSIBLE FOR RELEASING THIS OBJECT when you are finished with it.
- */
-- (SYPHON_IMAGE_UNIQUE_CLASS_NAME *)newFrameImage;
 
 /*!
  Stops the server instance. Use of this method is optional and releasing all references to the server has the same effect.
@@ -144,6 +138,13 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 /** @} */
 /** @name Publishing Frames */
 /** @{ */
+
+/*!
+ Returns a SyphonImage representing the current output from the server, valid in the server's CGL context. Call this method every time you wish to access the current server frame. This object has a limited useful lifetime, and may have GPU resources associated with it: you should release it as soon as you are finished drawing with it.
+ 
+ @returns A SyphonImage representing the current output from the server. YOU ARE RESPONSIBLE FOR RELEASING THIS OBJECT when you are finished with it.
+ */
+- (SYPHON_IMAGE_UNIQUE_CLASS_NAME *)newFrameImage;
 
 /*!
  Publishes the part of the texture described in region of the named texture to clients. The texture is copied and can be safely disposed of or modified once this method has returned. You should not bracket calls to this method with calls to -bindToDrawFrameOfSize: and -unbindAndPublish - they are provided as an alternative to using this method.
@@ -200,9 +201,29 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 #pragma mark - Standard Server Implementation
 
 @interface SYPHON_SERVER_UNIQUE_CLASS_NAME : NSObject<SyphonServer>
+{
+@protected
+    NSString *_name;
+    NSString *_uuid;
+    BOOL _broadcasts;
+    
+    int32_t _mdLock;
+    
+    id<NSObject> _activityToken;
+    
+    id _connectionManager;
+}
 
+
+/*!
+ Returns an opaque object conforming to the SyphonServerGL implementation, allowing you to integrate Syphon into your OpenGL Pipeline and send GL Textures as Syphon Images.
+*/
 - (id<SyphonServerGL>)initWithName:(NSString*)serverName context:(CGLContextObj)context options:(NSDictionary *)options;
-- (id<SyphonServerMetal>)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options;
+
+/*!
+ Returns an opaque object conforming to the SyphonServerMetal implementation, allowing you to integrate Syphon into your Metal Pipeline and send Metal Textures as Syphon Images.
+ */
+//- (id<SyphonServerMetal>)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options;
 
 @end
 
