@@ -29,6 +29,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/OpenGL.h>
+#import <Metal/Metal.h>
+#import <MetalPerformanceShaders/MetalPerformanceShaders.h>
+
 
 /*! @name Server Options Dictionary Key Constants */
 /*! @{ */
@@ -71,6 +74,35 @@ extern NSString * const SyphonServerOptionStencilBufferResolution;
 
 #define SYPHON_SERVER_UNIQUE_CLASS_NAME SYPHON_UNIQUE_CLASS_NAME(SyphonServer)
 #define SYPHON_IMAGE_UNIQUE_CLASS_NAME SYPHON_UNIQUE_CLASS_NAME(SyphonImage)
+
+@class SYPHON_IMAGE_UNIQUE_CLASS_NAME;
+
+@protocol SyphonServer
+
+@property (retain) NSString* name;
+@property (readonly) NSDictionary* serverDescription;
+@property (readonly) BOOL hasClients;
+- (SYPHON_IMAGE_UNIQUE_CLASS_NAME *)newFrameImage;
+- (void)stop;
+
+@end
+
+// OpenGL Syphon Server methods for Legacy and Core Profile
+@protocol SyphonServerGL<SyphonServer>
+- (id)initWithName:(NSString*)serverName context:(CGLContextObj)context options:(NSDictionary *)options;
+@property (readonly) CGLContextObj context;
+- (void)publishFrameTexture:(GLuint)texID textureTarget:(GLenum)target imageRegion:(NSRect)region textureDimensions:(NSSize)size flipped:(BOOL)isFlipped;
+- (BOOL)bindToDrawFrameOfSize:(NSSize)size;
+- (void)unbindAndPublish;
+@end
+
+// Metal Syphon Server for 1013 or better.
+@protocol SyphonServerMetal<SyphonServer>
+- (id)initWithName:(NSString*)serverName device:(id<MTLDevice>)device options:(NSDictionary *)options;
+@property (readonly) id<MTLDevice> device;
+- (void)publishFrameTexture:(id<MTLTexture>)texture imageRegion:(NSRect)region flipped:(BOOL)isFlipped;
+- (void)publishFrameImage:(MPSImage*)image imageRegion:(NSRect)region flipped:(BOOL)isFlipped;
+@end
 
 @class SYPHON_IMAGE_UNIQUE_CLASS_NAME;
 
