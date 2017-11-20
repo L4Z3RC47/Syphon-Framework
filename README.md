@@ -8,7 +8,8 @@ If you have a MKView drawable you present, and you want to share the color attac
 
 Once you schedule the presentation of your drawable you can publish via a call similar to:
 
-```    [self.server publishFrameTexture:self.view.currentDrawable.texture imageRegion:NSMakeRect(0,0,self.view.currentDrawable.texture.width, self.view.currentDrawable.texture.height)];
+```
+[self.server publishFrameTexture:self.view.currentDrawable.texture imageRegion:NSMakeRect(0,0,self.view.currentDrawable.texture.width, self.view.currentDrawable.texture.height)];
 ```
 
 #### Syphon
